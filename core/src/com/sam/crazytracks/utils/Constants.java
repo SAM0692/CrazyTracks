@@ -5,6 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Constants {
 
+    //World units convertion variable
+    public static final float PPM = 100;
+
     //Application Dimentions
     public static final int APP_WIDHT = 840;
     public static final int APP_HEIGHT = 480;
