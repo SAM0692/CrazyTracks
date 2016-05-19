@@ -20,7 +20,7 @@ public class WorldUtil {
         FixtureDef fdef = new FixtureDef();
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set(new Vector2(160 / PPM, 120 / PPM));
+        bdef.position.set(new Vector2(50 / PPM, 0));
         body = world.createBody(bdef);
 
         shape.setAsBox(50 / PPM, 5 / PPM);
@@ -40,7 +40,7 @@ public class WorldUtil {
         FixtureDef fdef = new FixtureDef();
 
         bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.position.set(new Vector2(160 / PPM, 180 / PPM));
+        bdef.position.set(new Vector2(50 / PPM, 10 / PPM));
         body = world.createBody(bdef);
 
         shape.setAsBox(5 / PPM, 5 / PPM);

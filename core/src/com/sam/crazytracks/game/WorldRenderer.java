@@ -29,7 +29,7 @@ public class WorldRenderer implements Disposable {
     private void init() {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, Constants.APP_WIDTH / PPM, Constants.APP_HEIGHT / PPM);
+        camera.setToOrtho(false, Constants.VIEWPORT_WIDTH / PPM, Constants.VIEWPORT_HEIGHT / PPM);
 
         b2dRenderer = new Box2DDebugRenderer();
     }

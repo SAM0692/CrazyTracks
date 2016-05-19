@@ -16,8 +16,8 @@ public class Constants {
 
 
     // Visible game world dimensions
-    public static final int VIEWPORT_WIDTH = 50;
-    public static final int VIEWPORT_HEIGHT = 32;
+    public static final int VIEWPORT_WIDTH = 70;
+    public static final int VIEWPORT_HEIGHT = 35;
 
     //World variables
     public static final Vector2 WORLD_GRAVITY = new Vector2(0, -9.8f);
