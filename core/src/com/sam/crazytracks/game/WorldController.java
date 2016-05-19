@@ -1,9 +1,9 @@
 package com.sam.crazytracks.game;
 
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
+import com.sam.crazytracks.util.WorldUtil;
 
 /**
  * Created by sam on 11/05/16.
@@ -11,69 +11,30 @@ import com.badlogic.gdx.math.MathUtils;
 public class WorldController {
     private static final String TAG = WorldController.class.getName();
 
-    public Sprite[] testSprites;
-    public int selectedSprite;
+    World world;
+    Body ground;
+    Body player;
+
+    private final float TIME_STEP = 1f/60f;
+    private float accumulator = 0f;
 
     public WorldController() {
         init();
     }
 
     private void init() {
-        initTestObjects();
-    }
-
-    private void initTestObjects() {
-        testSprites = new Sprite[5];
-
-        int width = 32;
-        int height = 32;
-        Pixmap pixmap = createProceduralPixmap(width, height);
-
-        Texture texture = new Texture(pixmap);
-
-        for(int i = 0; i < testSprites.length; i++) {
-            Sprite spr = new Sprite(texture);
-            spr.setSize(1, 1);
-            spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
-
-            float randomX = MathUtils.random(-2.0f, 2.0f);
-            float randomY = MathUtils.random(-2.0f, 2.0f);
-            spr.setPosition(randomX, randomY);
-        }
-
-        selectedSprite = 0;
-    }
-
-    private Pixmap createProceduralPixmap(int width, int height) {
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-
-        //Fill square with red at 50% opacity
-        pixmap.setColor(1, 0, 0, 0.5f);
-        pixmap.fill();
-        // Draw a yellow X inside the square
-        pixmap.setColor(1, 1, 0, 1);
-        pixmap.drawLine(0, 0, width, height);
-        pixmap.drawLine(width, 0, 0, height);
-        //Draw a cyan colored border around the square
-        pixmap.setColor(0, 1, 1, 1);
-        pixmap.drawRectangle(0, 0, width, height);
-
-        return pixmap;
+        world = WorldUtil.createWorld();
+        ground = WorldUtil.createGround(world);
+        player = WorldUtil.createPlayer(world);
     }
 
     public void update(float deltaTime) {
-        handleDebugInput();
-        updateTestObject(deltaTime);
-    }
-
-    private void handleDebugInput() {
-
-    }
-
-    private void updateTestObject(float deltaTime) {
-        float rotation = testSprites[selectedSprite].getRotation();
-        rotation += 90 * deltaTime;
-        rotation %= 360;
-        testSprites[selectedSprite].setRotation(rotation);
+        world.step(TIME_STEP, 6, 2);
+//        accumulator += deltaTime;
+//
+//        while (accumulator >= deltaTime) {
+//            world.step(TIME_STEP, 6, 2);
+//            accumulator -= TIME_STEP;
+//        }
     }
 }
